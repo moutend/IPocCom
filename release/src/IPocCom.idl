@@ -1,0 +1,61 @@
+import "oaidl.idl";
+import "ocidl.idl";
+import "UIAutomationClient.idl";
+import "OleAcc.idl";
+
+typedef [v1_enum] enum {
+	LOGLEVEL_NONE = 0,
+	LOGLEVEL_INFO = 1,
+	LOGLEVEL_WARN = 2,
+	LOGLEVEL_FAIL = 3
+} LOGLEVEL;
+
+typedef [v1_enum] enum {
+	TW_NONE = 0,
+	TW_NEXT = 1,
+	TW_PREVIOUS = 2,
+	TW_FIRST_CHILD = 3,
+	TW_LAST_CHILD = 4,
+	TW_PARENT = 5
+} TreeWalkerDirection;
+
+typedef [v1_enum] enum {
+	AA_NONE = 0,
+	AA_IAccessible = 1,
+	AA_IAccessible2 = 2,
+	AA_IUIAutomation = 3
+} AvailableAccessibilityAPI;
+
+typedef INT64(__stdcall *IUIEventHandler)(INT64 eventId, IUIAutomationElement *pInterface);
+
+typedef INT64(__stdcall *IAEventHandler)(INT64 eventId, INT64 childId, IAccessible *pInterface);
+
+[
+	object,
+	dual,
+	uuid(E3D70497-4CF1-4211-B314-53D610885658)
+]
+interface IPocCom : IDispatch {
+	[id(1), local] HRESULT Start([in] LPWSTR logServerAddr, [in] LOGLEVEL level);
+	[id(2), local] HRESULT Stop();
+	[id(3), local] HRESULT SetMSAAEventHandler([in] IAEventHandler handleFunc);
+	[id(4), local] HRESULT SetUIAEventHandler([in] IUIEventHandler handleFunc);
+	[id(5), local] HRESULT GetIUIAutomationElement([in] TreeWalkerDirection direction, [in] IUIAutomationElement *pRootElement, [in] IUIAutomationElement **ppElement);
+	[id(6), local] HRESULT UpdateTreeWalker();
+	[id(7), local] HRESULT ElementFromHandle([in] UIA_HWND hwnd, [in] IUIAutomationElement **ppElement);
+}
+[
+	uuid(74FA9410-C4D2-4300-BBBB-4E6230C4F0B4),
+	version(1.0),
+	helpstring("Type library for audio server")
+]
+library PocComLib {
+	importlib("stdole2.tlb");
+	[
+		uuid(909C2521-B9A3-40C1-9B35-702B5A6AB52D)
+	]
+	coclass PocCom
+	{
+		[default] interface IPocCom;
+	}
+}
