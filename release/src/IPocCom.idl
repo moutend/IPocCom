@@ -33,7 +33,7 @@ typedef INT64(__stdcall *IAEventHandler)(INT64 eventId, INT64 childId, IAccessib
 [
 	object,
 	dual,
-	uuid(E3D70497-4CF1-4211-B314-53D610885658)
+	uuid(8196FA35-1F5F-43E0-A8F6-BDECF6615D70)
 ]
 interface IPocCom : IDispatch {
 	[id(1), local] HRESULT Start([in] LPWSTR logServerAddr, [in] LOGLEVEL level);
@@ -45,14 +45,14 @@ interface IPocCom : IDispatch {
 	[id(7), local] HRESULT ElementFromHandle([in] UIA_HWND hwnd, [in] IUIAutomationElement **ppElement);
 }
 [
-	uuid(74FA9410-C4D2-4300-BBBB-4E6230C4F0B4),
+	uuid(0D9E116E-8B4F-4AC7-AD14-B04DEB4D833C)
 	version(1.0),
-	helpstring("Type library for audio server")
+	helpstring("Type library for PoC COM")
 ]
 library PocComLib {
 	importlib("stdole2.tlb");
 	[
-		uuid(909C2521-B9A3-40C1-9B35-702B5A6AB52D)
+		uuid(BD44057A-88AA-4A7B-BD7F-1905BC96E974)
 	]
 	coclass PocCom
 	{
