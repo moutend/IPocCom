@@ -45,7 +45,7 @@ interface IPocCom : IDispatch {
 	[id(7), local] HRESULT ElementFromHandle([in] UIA_HWND hwnd, [in] IUIAutomationElement **ppElement);
 }
 [
-	uuid(0D9E116E-8B4F-4AC7-AD14-B04DEB4D833C)
+	uuid(0D9E116E-8B4F-4AC7-AD14-B04DEB4D833C),
 	version(1.0),
 	helpstring("Type library for PoC COM")
 ]
